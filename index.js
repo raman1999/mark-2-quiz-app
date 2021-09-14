@@ -5,12 +5,12 @@ var score = 0;
 
 
 
-  var name = read.question("Enter your name? ");
+  var name = read.question(chalk.red("Enter your name? "));
   
 function greet(){
-  var greeting = `Welcome! ${name}
-  This sports quiz MCQS will test your knowledge! `
-  console.log(greeting);
+  var greeting = `\nWelcome! ${name}
+  This sports quiz MCQS will test your knowledge!\n `
+  console.log(chalk.yellowBright(greeting));
 
   
 }
@@ -18,17 +18,19 @@ function greet(){
 
 function check(command){
   if (command === "no"||command==="No"){
-    console.log(chalk.red(`Exiting..... DONE!`))
+    console.log(chalk.red(`Exiting..... DONE!\n`))
     process.exit()
     }
     else if(command==="Yes"||command==="yes"){
     console.log(chalk.green("Starting......"))
     console.log("\n")
     
-    looping();
+    
     }else{
       console.log(chalk.red("Enter the right command"))
     }
+
+    
 }
 
 
@@ -38,16 +40,17 @@ function check(command){
 /////// main funciton (5)
 function quiz(question,rightAnswer){
 
-  var userAnswer = read.question(question)
+console.log(question);
+  var userAnswer = read.question(chalk.redBright("Enter your choice:"));
   
   if (rightAnswer === userAnswer) {
       console.log(chalk.green("Correct answer! "));
       score +=1
-      console.log("Your current Score is: "+ score)
+      console.log(chalk.green("Your current Score is: ")+ score)
   
   }else{
       console.log(chalk.red.bold("Oops,Wrong answer"));
-      console.log("Your cuurent Score: "+ score)
+      console.log(chalk.green("Your current Score: ")+ score)
   }
 }
 
@@ -120,7 +123,7 @@ var highscore ={
 function end(){
 
   
-  console.log("Your score is " + score )
+  console.log(chalk.green("Your final score is ") + score )
 
   if (score > highscore.score){
     console.log(chalk.green(`You just BROKE the record holded by ${highscore.name}`))
@@ -129,7 +132,7 @@ function end(){
 
   }else{
     
-    console.log(`Highest score is ${highscore.score} by ${highscore.name}`)
+    console.log(chalk.red(`Highest score is ${highscore.score} by ${highscore.name}`));
   }
 
 }
@@ -148,7 +151,8 @@ function looping(){
 /*
 "Below is the logic section"
 */
-greet();
-check(read.question("Shall we start (Yes/No):"))
+greet()
+check(read.question(chalk.redBright("Shall we start (Yes/No):")));
+looping();
 console.log("\n")
 end()
